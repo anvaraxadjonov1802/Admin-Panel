@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students</title>
+    <title>Teachers</title>
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 
 </head>
@@ -90,7 +90,7 @@
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Students</h2>
+                    <h2>Teachers</h2>
                     <div class="search">
                         <label>
                             <input type="text" placeholder="Search here">
@@ -111,11 +111,11 @@
                     </thead>
     
                     <tbody>
-                        {% for student in students  %}
+                        {% for teacher in teachers  %}
                         <tr>
-                            <td>{{ student.name }}</td>
-                            <td>{{ student.group.name }}</td>
-                            <td>{{ student.created_at }}</td>
+                            <td>{{ teacher.name }}</td>
+                            <td>{{ teacher.group.name }}</td>
+                            <td>{{ teacher.created_at }}</td>
                             <td><span class="status delivered">Studying</span></td>
                         </tr>
                         {% endfor %}

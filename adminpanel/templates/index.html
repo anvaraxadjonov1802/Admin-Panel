@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+    <title>Dashboard</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     
@@ -27,7 +27,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{% url 'dashboard' %}">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -36,7 +36,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{% url 'students' %}">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -45,7 +45,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{% url 'teachers' %}">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="user">
-                    <img src={% static "assets/imgs/customer01.jpg"%} alt="">
+                    <img src= {% static "assets/imgs/customer01.jpg"%} alt="">
                 </div>
             </div>
 
@@ -113,7 +113,7 @@
             <div class="cardBox">
                 <div class="card">
                     <div>
-                        <div class="numbers">1,504</div>
+                        <div class="numbers">{{students_count}}</div>
                         <div class="cardName">Students</div>
                     </div>
 
@@ -124,7 +124,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">80</div>
+                        <div class="numbers">{{teachers_count}}</div>
                         <div class="cardName">Teachers</div>
                     </div>
 
@@ -135,7 +135,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">284</div>
+                        <div class="numbers">{{groups_count}}</div>
                         <div class="cardName">Groups</div>
                     </div>
 
@@ -146,8 +146,8 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">7,842</div>
-                        <div class="cardName">Earning</div>
+                        <div class="numbers">{{payment_sum}}</div>
+                        <div class="cardName">Payments</div>
                     </div>
 
                     <div class="iconBx">
@@ -168,68 +168,22 @@
                         <thead>
                             <tr>
                                 <td>Name</td>
-                                <td>Subject</td>
+                                <td>Group</td>
                                 <td>Date added</td>
                                 <td>Status</td>
                             </tr>
                         </thead>
 
                         <tbody>
+                            {% for student in students %}
                             <tr>
-                                <td>Student name</td>
-                                <td>Subject name</td>
-                                <td>DATA</td>
+                                <td>{{student.name}}</td>
+                                <td>{{ student.group.name }}</td>
+                                <td>{{ student.created_at }}</td>
                                 <td><span class="status delivered">Studying</span></td>
                             </tr>
+                            {% endfor %}
 
-                            <tr>
-                                <td>Student name</td>
-                                <td>Subject name</td>
-                                <td>DATA</td>
-                                <td><span class="status delivered">Studying</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Student name</td>
-                                <td>Subject name</td>
-                                <td>DATA</td>
-                                <td><span class="status return">Excluded</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Student name</td>
-                                <td>Subject name</td>
-                                <td>DATA</td>
-                                <td><span class="status inProgress">Graduated</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Student name</td>
-                                <td>Subject name</td>
-                                <td>DATA</td>
-                                <td><span class="status delivered">Studying</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Student name</td>
-                                <td>Subject name</td>
-                                <td>DATA</td>
-                                <td><span class="status delivered">Studying</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Student name</td>
-                                <td>Subject name</td>
-                                <td>DATA</td>
-                                <td><span class="status return">Excluded</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Student name</td>
-                                <td>Subject name</td>
-                                <td>DATA</td>
-                                <td><span class="status inProgress">Graduated</span></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -241,78 +195,18 @@
                     </div>
 
                     <table>
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src={% static "assets/imgs/customer02.jpg"%} alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
 
+                        {% for teacher in teachers %}
                         <tr>
                             <td width="60px">
-                                <div class="imgBx"><img src={% static "assets/imgs/customer01.jpg"%} alt=""></div>
+                                <div class="imgBx"><img src="{{teacher.imageURL}}" alt=""></div>
                             </td>
                             <td>
-                                <h4>Amit <br> <span>India</span></h4>
+                                <h4>{{ teacher.name }} <br> <span>{{ teacher.fname }}</span></h4>
                             </td>
                         </tr>
+                        {% endfor %}
 
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src={% static "assets/imgs/customer02.jpg"%} alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src={% static "assets/imgs/customer01.jpg"%} alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src={% static "assets/imgs/customer02.jpg"%} alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src={% static "assets/imgs/customer01.jpg"%} alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src={% static "assets/imgs/customer01.jpg"%}
-                                     alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src={% static "assets/imgs/customer02.jpg"%} alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
                     </table>
                 </div>
             </div>

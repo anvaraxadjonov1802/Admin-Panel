@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+</head>
+<body>    
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img src="{% static 'assets/imgs/logo.png' %}" alt="" style="width: 40px; margin: 10px">
+                        </span>
+                        <span class="title">STRAT SCHOOL</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Students</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Teachers</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="cash-outline"></ion-icon>
+                        </span>
+                        <span class="title">Payment</span>
+                    </a>
+                </li> 
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">Help</span>
+                    </a>
+                </li>
+
+                {% comment %} <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>{% endcomment %}
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class = "main">
+        <div class="details">
+            <div class="recentOrders">
+                <div class="cardHeader">
+                    <h2>Students</h2>
+                    <a href="#" class="btn">+ Add</a>
+                </div>
+    
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Subject</td>
+                            <td>Date added</td>
+                            <td>Status</td>
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        <tr>
+                            <td>Student name</td>
+                            <td>Subject name</td>
+                            <td>DATA</td>
+                            <td><span class="status delivered">Studying</span></td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- ================ Order Details List ================= -->
+    
+    <!-- =========== Scripts =========  -->
+        
+    <script src={% static "assets/js/main.js" %}></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

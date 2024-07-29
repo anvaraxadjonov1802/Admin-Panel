@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
+from .form import PaymentsForm
+from django.http import HttpResponse
+
 
 def dashboard(request):
     all_students = Students.objects.all().order_by('-id')
@@ -30,7 +33,6 @@ def dashboard(request):
         if hisob > 0:
             students.append(i)
             hisob-=1
-    
     
     context = {
         "students" : students,
@@ -67,3 +69,122 @@ def teachers(request):
         request=request,
         template_name="teachers.html" 
     )
+    
+def payments(request):
+    payments = Payments.objects.all().order_by('-id')
+    students = Students.objects.all().order_by('-id')
+    
+    context = {
+        "payments" : payments,
+        "students" : students
+    }
+    return render(
+        context=context,
+        request=request,
+        template_name="payments.html" 
+    )
+def groups(request):
+    groups = Groups.objects.all().order_by("-id")
+    students = Students.objects.all()
+    main_list = []
+    count = 0
+    item = []
+    for i in groups:
+        item.append(f"{i.name}")
+        for j in students:
+            if j.group.name == i.name:
+                count += 1
+        item.append(count)
+        main_list.append(item)
+        item = []
+        
+    
+    context = {
+        "groups" : groups,
+        "count" : main_list
+    }
+    
+    return render(
+        context=context,
+        template_name="groups.html",
+        request=request
+    )
+    
+def image_view(request, id):
+    payments = Payments.objects.filter()
+    for i in payments:
+        if id == i.id:
+            payment = i
+            
+    context = {
+        "payment" : payment
+    }
+    return render(
+        request=request,
+        template_name="kvitansiya.html",
+        context=context
+    )
+
+def payment_input(request):
+    
+    students = Students.objects.all()
+    if request.method == 'POST':
+        sum = request.POST.get('sum')
+        student = request.POST.get('student')
+        img = request.POST.get('img')
+        
+        form = PaymentsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            img_obj = form.instance
+            return render(request, 'payments_input.html', {'form': form, 'img_obj': img_obj})
+        print(sum)
+        print(student)
+        print(form)
+        # payment = Payments.objects.create(
+        #     sum = sum,
+        #     student = student,
+        #     image = img
+        # )
+        # payment.save()
+        return redirect('dashboard')
+    
+    context = {
+        "students" : students
+    }
+    return render(
+        request=request,
+        template_name='payment_input.html',
+        context=context
+    )
+
+def group_input(request):
+    
+    teachers = Teachers.objects.all()
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        teacher = request.POST.get('teacher')
+        
+        
+        print(name)
+        for i in teachers:
+            if i.id == int(teacher):
+                teacher = i
+        # print(teacher)
+                
+        group = Groups.objects.create(
+            name =  name,
+            teacher = teacher   
+        )
+        group.save()
+        return redirect('groups')
+    
+    context = {
+        "teachers" : teachers
+    }
+    return render(
+        request=request,
+        template_name='groups_input.html',
+        context=context
+    )
+    

@@ -50,7 +50,7 @@
                 </li>
                 
                 <li>
-                    <a href="#">
+                    <a href="{% url 'payments' %}">
                         <span class="icon">
                             <ion-icon name="cash-outline"></ion-icon>
                         </span>
@@ -116,7 +116,7 @@
                             <td>{{ student.name }}</td>
                             <td>{{ student.group.name }}</td>
                             <td>{{ student.created_at }}</td>
-                            <td><span class="status delivered">Studying</span></td>
+                            <td><span class="status delivered">{{ student.condition}}</span></td>
                         </tr>
                         {% endfor %}
     

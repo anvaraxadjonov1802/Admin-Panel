@@ -4,8 +4,11 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teachers</title>
+    <title>Payments</title>
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 
 </head>
 <body>    
@@ -90,33 +93,38 @@
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Teachers</h2>
+                    <h2>Payments</h2>
                     <div class="search">
                         <label>
                             <input type="text" placeholder="Search here">
                             <ion-icon name="search-outline"></ion-icon>
                         </label>
                     </div>
-                    <a href="#" class="btn">+ Add</a>
+                    <a href="{% url 'payment_input' %}" class="btn">+ Add</a>
                 </div>
-    
+                
                 <table>
                     <thead>
                         <tr>
-                            <td></td>
-                            <td>Full Name</td>
-                            <td>Phone Number</td>
-                            <td>Date added</td>
+                            <td>Payment amount</td>
+                            <td>Student</td>
+                            <td>Date</td>
+                            <td>Proof</td>
                         </tr>
                     </thead>
     
                     <tbody>
-                        {% for teacher in teachers  %}
+                        {% for payment in payments  %}
                         <tr>
-                            <td><img src = "{{teacher.imageURL}}"></td>
-                            <td>{{ teacher.name }} {{teacher.fname}}</td>
-                            <td>{{ teacher.phone_number }}</td>
-                            <td>{{ teacher.created_at }}</td>
+                            <td>{{ payment.sum }}so'm</td>
+                            <td>{{ payment.student.name }}</td>
+                            <td>{{ payment.created_at }}</td>
+                            <td> 
+                                <a href = "{% url 'image_view' payment.id %}" target = _blank>
+                                    <img src = "{{ payment.imageURL }}" style = "width: 50px">    
+
+                                </a>
+                            </td>
                         </tr>
                         {% endfor %}
     
@@ -134,6 +142,5 @@
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    
 </body>
 </html>

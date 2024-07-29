@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teachers</title>
+    <title>Groups</title>
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 
 </head>
-<body>    
+
+<body>
     <!-- =============== Navigation ================ -->
     <div class="container">
         <div class="navigation">
@@ -48,7 +50,7 @@
                         <span class="title">Teachers</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="{% url 'payments' %}">
                         <span class="icon">
@@ -56,7 +58,7 @@
                         </span>
                         <span class="title">Payment</span>
                     </a>
-                </li> 
+                </li>
 
                 <li>
                     <a href="#">
@@ -86,54 +88,78 @@
             </ul>
         </div>
     </div>
-    <div class = "main">
+    <div class="main">
         <div class="details">
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Teachers</h2>
+                    <h2>Groups</h2>
                     <div class="search">
                         <label>
                             <input type="text" placeholder="Search here">
                             <ion-icon name="search-outline"></ion-icon>
                         </label>
                     </div>
-                    <a href="#" class="btn">+ Add</a>
+                    
                 </div>
-    
-                <table>
-                    <thead>
-                        <tr>
-                            <td></td>
-                            <td>Full Name</td>
-                            <td>Phone Number</td>
-                            <td>Date added</td>
-                        </tr>
-                    </thead>
-    
-                    <tbody>
-                        {% for teacher in teachers  %}
-                        <tr>
-                            <td><img src = "{{teacher.imageURL}}"></td>
-                            <td>{{ teacher.name }} {{teacher.fname}}</td>
-                            <td>{{ teacher.phone_number }}</td>
-                            <td>{{ teacher.created_at }}</td>
-                        </tr>
-                        {% endfor %}
-    
-                    </tbody>
-                </table>
+
+                <div id="content" class="colM">
+                    <h1>Add groups</h1>
+                    <div id="content-main">
+                        <form method="post" id="groups_form" novalidate=""><input type="hidden"
+                                name="csrfmiddlewaretoken"
+                                value="jyxTV0lrKiAXoNJZQPdZ70fpSxlGJJ4e7zy8z84DBREiLlphBd5xOJsPQiAEsw5L">
+                            <div>
+                                <fieldset class="module aligned ">
+                                    <div class="form-row field-name">
+                                        <div>
+                                            <div class="flex-container">
+                                                <label class="required" for="id_name">Name:</label>
+                                                <input type="text" name="name" class="vTextField" maxlength="200"
+                                                    required="" id="id_name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row field-teacher">
+                                        <div>
+                                            <div class="flex-container">
+                                                <label class="required" for="id_teacher">Teacher:</label>
+                                                <div class="related-widget-wrapper" data-model-ref="teachers">
+                                                    <select name="teacher" required="" id="id_teacher">
+                                                        <option value="" selected="">Tanlang:</option>
+                                                        {% for teacher in teachers %}
+                                                        <option value="{{ teacher.id }}">{{teacher.name}}
+                                                            {{teacher.fname}}</option>
+
+                                                        {% endfor %}
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="submit-row">
+                                    <button type="submit">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <br class="clear">
+                </div>
             </div>
         </div>
     </div>
     <!-- ================ Order Details List ================= -->
-    
+
     <!-- =========== Scripts =========  -->
-        
+
     <script src={% static "assets/js/main.js" %}></script>
 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    
 </body>
+
 </html>
